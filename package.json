@@ -1,0 +1,23 @@
+{
+  "name": "x6-debugger",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@antv/x6": "^0.0.3",
+    "antd": "^4.21.4",
+    "next": "12.2.0",
+    "react": "18.2.0",
+    "react-dom": "18.2.0"
+  },
+  "devDependencies": {
+    "eslint": "8.18.0",
+    "eslint-config-next": "12.2.0",
+    "prettier": "^2.7.1"
+  }
+}
