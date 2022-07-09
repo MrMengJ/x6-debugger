@@ -1,56 +1,76 @@
 import * as React from "react";
 import { Graph } from "@antv/x6";
 
-import { Tabs } from "antd";
-const { TabPane } = Tabs;
-
 export default class Example extends React.Component {
   componentDidMount() {
     this.graph = new Graph({
       container: this.container,
-      grid: { visible: true },
+      grid: { visible: true, size: 10, snapToGrid: false },
       clipboard: {
         enabled: true,
       },
       selecting: {
         enabled: true,
         showNodeSelectionBox: true,
+        rubberband: true,
+        rubberEdge: true, // 框选可以选中edge
+        rubberNode: true, // 框选可以选中node
+        strict: true,
+        showEdgeSelectionBox: false, // 必须为false，否则连接线的文本编辑功能会失效
       },
       keyboard: {
         enabled: true,
         global: true,
       },
+      mousewheel: {
+        enabled: true,
+        modifiers: "alt",
+      },
+      snapline: {
+        enabled: true,
+      },
+      resizing: {
+        enabled: true,
+      },
+      rotating: {
+        enabled: true,
+      },
     });
+
+    window.graph = this.graph;
 
     this.graph.addNode({
       x: 280,
-      y: 100,
+      y: 10,
       width: 100,
       height: 40,
       label: "Rect",
+      // id: "rect",
     });
 
     const source = this.graph.addNode({
       x: 32,
-      y: 32,
+      y: 100,
       width: 100,
       height: 40,
       label: "Hello",
+      // id: "hello",
     });
 
     const target = this.graph.addNode({
       shape: "circle",
-      x: 160,
+      x: 32,
       y: 180,
       width: 60,
       height: 60,
       label: "World",
+      // id: "circle",
     });
 
-    this.graph.addEdge({
-      source,
-      target,
-    });
+    // this.graph.addEdge({
+    //   source,
+    //   target,
+    // });
 
     this.graph.bindKey("ctrl+c", () => {
       const cells = this.graph.getSelectedCells();
@@ -74,28 +94,25 @@ export default class Example extends React.Component {
     this.container = container;
   };
 
+  handleLogCellsPosition = () => {
+    const position = {};
+    this.graph.getCells().forEach((cell) => {
+      position[cell.id] = cell.getPosition();
+    });
+
+    console.log("position", position);
+  };
+
   render() {
     return (
-      <div className="app">
-        <div className="app-info">
-          <p>
-            <span>Ctrl + C</span>Copy Cell
-            <span style={{ marginLeft: 24 }}>Ctrl + V</span>Paste Cell
-          </p>
+      <>
+        <button onClick={this.handleLogCellsPosition}>
+          log cells position
+        </button>
+        <div className="app">
+          <div className="app-content" ref={this.refContainer} />
         </div>
-        <div className="app-content" ref={this.refContainer} />
-        <Tabs defaultActiveKey="1" type="card">
-          <TabPane tab="Card Tab 1" key="1">
-            Content of card tab 1
-          </TabPane>
-          <TabPane tab="Card Tab 2" key="2">
-            Content of card tab 2
-          </TabPane>
-          <TabPane tab="Card Tab 3" key="3">
-            Content of card tab 3
-          </TabPane>
-        </Tabs>
-      </div>
+      </>
     );
   }
 }
