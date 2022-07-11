@@ -17,6 +17,7 @@ export default class Example extends React.Component {
         rubberNode: true, // 框选可以选中node
         strict: true,
         showEdgeSelectionBox: false, // 必须为false，否则连接线的文本编辑功能会失效
+        multipleSelectionModifiers: ["ctrl", "meta", "shift"],
       },
       keyboard: {
         enabled: true,
@@ -34,6 +35,21 @@ export default class Example extends React.Component {
       },
       rotating: {
         enabled: true,
+      },
+      scroller: {
+        enabled: true,
+        pageVisible: true,
+        pageBreak: true,
+        pannable: true,
+        padding: 40,
+        background: {
+          color: "transparent",
+        },
+        modifiers: "alt",
+        autoSize: true,
+        autoResizeOptions: {
+          direction: ["bottom", "right"],
+        },
       },
     });
 
