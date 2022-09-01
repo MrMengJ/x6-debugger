@@ -49,7 +49,16 @@ export default class Example extends React.Component {
         autoSize: true,
         autoResizeOptions: {
           direction: ["bottom", "right"],
+          filter(cell) {
+            if (cell.attrs.text.text === "Hello") {
+              return true;
+            }
+            return false;
+          },
         },
+      },
+      preventDefaultContextMenu({ graph, cell }) {
+        return false;
       },
     });
 
@@ -73,15 +82,15 @@ export default class Example extends React.Component {
       // id: "hello",
     });
 
-    const target = this.graph.addNode({
-      shape: "circle",
-      x: 32,
-      y: 180,
-      width: 60,
-      height: 60,
-      label: "World",
-      // id: "circle",
-    });
+    // const target = this.graph.addNode({
+    //   shape: "circle",
+    //   x: 32,
+    //   y: 180,
+    //   width: 60,
+    //   height: 60,
+    //   label: "World",
+    //   // id: "circle",
+    // });
 
     // this.graph.addEdge({
     //   source,
