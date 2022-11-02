@@ -37,16 +37,41 @@ export default class ManhattanRouterExample extends React.Component {
           return false;
         },
       },
+      history: {
+        enabled: true,
+      },
       resizing: true,
+      mousewheel: {
+        enabled: true,
+        modifiers: ["ctrl", "meta"],
+      },
+      connecting: {
+        snap: { radius: 20 },
+      },
+      highlighting: {
+        magnetAdsorbed: {
+          name: "stroke",
+          args: {
+            padding: 3,
+            attrs: {
+              fill: "rgba(66, 133, 244, 1)",
+              stroke: "rgba(66, 133, 244, 0.4)",
+              "stroke-width": 8,
+            },
+          },
+        },
+      },
     });
 
     window.graph = graph;
+    this.graph = graph;
 
     const source = graph.addNode({
-      x: 40,
-      y: 40,
+      x: 140,
+      y: 140,
       width: 120,
       height: 50,
+      angle: 0,
       attrs: {
         body: {
           fill: "#fe8550",
@@ -61,6 +86,41 @@ export default class ManhattanRouterExample extends React.Component {
           fontVariant: "small-caps",
         },
       },
+      // tools: [
+      //   {
+      //     name: "button",
+      //     args: {
+      //       markup: [
+      //         {
+      //           tagName: "circle",
+      //           selector: "button",
+      //           attrs: {
+      //             r: 14,
+      //             stroke: "#fe854f",
+      //             "stroke-width": 3,
+      //             fill: "white",
+      //             cursor: "pointer",
+      //           },
+      //         },
+      //         {
+      //           tagName: "text",
+      //           textContent: "Btn A",
+      //           selector: "icon",
+      //           attrs: {
+      //             fill: "#fe854f",
+      //             "font-size": 8,
+      //             "text-anchor": "middle",
+      //             "pointer-events": "none",
+      //             y: "0.3em",
+      //           },
+      //         },
+      //       ],
+      //       x: "100%",
+      //       y: "100%",
+      //       offset: { x: -18, y: -18 },
+      //     },
+      //   },
+      // ],
       ports: {
         items: [
           {
@@ -511,6 +571,7 @@ export default class ManhattanRouterExample extends React.Component {
     //       padding: 20,
     //     },
     //   },
+    //   zIndex: 1000,
     // });
   }
 
@@ -518,11 +579,39 @@ export default class ManhattanRouterExample extends React.Component {
     this.container = container;
   };
 
+  handleDelete = () => {
+    if (this.graph) {
+      const nodes = this.graph.getNodes();
+      if (nodes.length > 0) {
+        graph.removeNode(nodes[0].id);
+      }
+    }
+  };
+
+  handleUndo = () => {
+    if (this.graph) {
+      this.graph.undo();
+    }
+  };
+
+  handleRedo = () => {
+    if (this.graph) {
+      this.graph.redo();
+    }
+  };
+
   render() {
     return (
-      <div className="app">
-        <div className="app-content" ref={this.refContainer} />
-      </div>
+      <>
+        <div className="app">
+          <div className="app-content" ref={this.refContainer} />
+          <button onClick={this.handleDelete}>删除</button>
+        </div>
+        <div>
+          <button onClick={this.handleUndo}>undo</button>
+          <button onClick={this.handleRedo}>redo</button>
+        </div>
+      </>
     );
   }
 }
