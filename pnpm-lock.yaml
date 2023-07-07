@@ -5,6 +5,7 @@ specifiers:
   antd: ^4.21.4
   eslint: 8.18.0
   eslint-config-next: 12.2.0
+  nanoid: ^4.0.2
   next: 12.2.0
   prettier: ^2.7.1
   react: 18.2.0
@@ -13,6 +14,7 @@ specifiers:
 dependencies:
   '@antv/x6': 1.32.6
   antd: 4.21.4_biqbaboplfbrettd7655fr4n2y
+  nanoid: 4.0.2
   next: 12.2.0_biqbaboplfbrettd7655fr4n2y
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
@@ -1481,6 +1483,12 @@ packages:
   /nanoid/3.3.4:
     resolution: {integrity: sha512-MqBkQh/OHTS2egovRtLk45wEyNXwF+cokD+1YPf9u5VfJiRdAiRwB2froX5Co9Rh20xs4siNPm8naNotSD6RBw==}
     engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
+    hasBin: true
+    dev: false
+
+  /nanoid/4.0.2:
+    resolution: {integrity: sha512-7ZtY5KTCNheRGfEFxnedV5zFiORN1+Y1N6zvPTnHQd8ENUvfaDBeuJDZb2bN/oXwXxu3qkTXDzy57W5vAmDTBw==}
+    engines: {node: ^14 || ^16 || >=18}
     hasBin: true
     dev: false
 
