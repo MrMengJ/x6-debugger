@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@jecn/x6": "^0.0.54",
+    "@jecn/x6": "^0.0.65",
     "antd": "^4.21.4",
     "nanoid": "^4.0.2",
     "next": "12.2.0",
